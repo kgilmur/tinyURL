@@ -1,0 +1,31 @@
+body {
+  background: url('/images/background.jpg') no-repeat;
+  background-position: 800px 250px;
+  background-repeat: no-repeat;
+  background-size: 25%, auto;
+  font-family: Papyrus, fantasy !important;
+}
+
+.heading h1 {
+  font-family: Papyrus, fantasy !important;
+  font-size: 55px;
+}
+
+
+
+.btn-stroke-black {
+  background-color: transparent;
+  color: #666666 !important;
+  border: 3px solid #666666;
+  width:100%;
+  font-size: 20px;
+  font-weight: bold;
+  font-style: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
+
+}
+
+.btn-stroke-black:hover {
+  background-color: #666666;
+  color: white !important;
+}
+
