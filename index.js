@@ -31,7 +31,7 @@ app.get('/show/', function(req,res){
 
 app.post('/show', function(req, res) {
 
-  db.link.create({url:req.body.q}).then(function(data) {
+  db.link.create({url:req.body.url}).then(function(data) {
     var shortened = hashids.encode(data.id);
     data.hash = shortened;
     data.save().then(function() {
@@ -44,37 +44,35 @@ app.post('/show', function(req, res) {
 app.get('/:hash', function(req, res) {
   var id = parseInt(hashids.decode(req.params.hash))
   db.link.find(id).then(function(link) {
-    res.redirect(link.url)
+    res.redirect('show', link.url)
+    // res.render('show', {url: req.headers.host + "/" + .hash});
   })
 })
 
-// app.post('/show',function(req,res){
-//  // articleList.push({title:req.body.title,body:req.body.body});
-//  // articleList.push(req.body);
+// db.link.findOrCreate({where:{url:req.body.url}}).spread(function(link, created) {
+//   var shortened = hashids.encode(link.id)
+//   link.hash = shortened;
+//     link.save().then(function(data)  {
+//      // res.render('show',{url: data.url,hash: data.hash});
+//      // console.log(data);
 
-//  db.link.findOrCreate({where: { url: req.body.q,}})
-//  .spread(function(link, created) {
-//    console.log(link) // returns info about the user
-//    var hash = hashids.encode(link.id)
-//    //for and if else^^^^
-//    res.render('show',{hash:hash});
-//    link.hash = hash
-//    link.save()
-//  })
-
+//      res.render('show', {url: req.headers.host + "/" + data.hash});
+//     })
+//   })
 // });
 
-// app.get("/:hash",function(req,res){
-//  var id = parseInt(hashids.decode(req.params.hash))
-//  db.link.find(id).then(function(link)
-//    {res.redirect('http://'+link.url)})
+
+
+// app.get("/:hash", function(req,res){
+//  db.urls.find({where:{hash:req.params.hash}}).then(function(decoded){
+//    if(decoded){
+//      res.redirect(decoded.url);
+//    }else{
+//      res.send('unknown url');
+//    }
+
+//  })
 // })
-
-
-// app.get('/:hash', function(req, res) {
-//   var id = parseInt(hashids.decode(req.params.hash))
-//   db.link.find({hash:req.params.hash})
-//   res.redirect('show'+data.hash)
 
 
 
